@@ -1,18 +1,18 @@
-interface IJesterBehavior {
+interface IJestorBehavior {
   return(value: any): void
   resolveWith(value: any): void
   rejectWith(value: any): void
   throw(value: any): void
 }
 
-type JesterRuleGetter = (ruleBuilder: { whenCalledWith(...args: any[]): IJesterBehavior }) => any[]
+type JestorRuleGetter = (ruleBuilder: { whenCalledWith(...args: any[]): IJestorBehavior }) => any[]
 
-interface IJester {
-  whenCalledWith(...args: any[]): IJesterBehavior
-  followRules(ruleGetter: JesterRuleGetter): void
+interface IJestor {
+  whenCalledWith(...args: any[]): IJestorBehavior
+  followRules(ruleGetter: JestorRuleGetter): void
 }
 
-export function jester(jestMock: jest.Mock): IJester {
+export function jestor(jestMock: jest.Mock): IJestor {
   const rules = []
   return {
     followRules: ruleGetter => {

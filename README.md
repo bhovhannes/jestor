@@ -1,33 +1,33 @@
-# jester
+# jestor
 
 [![NPM version][npm-version-image]][npm-url] [![NPM downloads][npm-downloads-image]][npm-url] [![Dependencies][deps-image]][deps-url] [![Dev. Dependencies][dev-deps-image]][dev-deps-url] [![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url] [![Coverage][codecov-image]][codecov-url]
 
-Utility for creating mock implementations for mocks.
+Utility for creating mock implementations for Jest mocks.
 
 ## Usage
 
-First add `jester` as a devDependency.
+First add `jestor` as a devDependency.
 
 ```bash
-npm install jester --save-dev
+npm install jestor --save-dev
 ```
 
 or if you prefer Yarn:
 
 ```bash
-yarn add jester --dev
+yarn add jestor --dev
 ```
 
-After that you can import `jester` in your tests and use it in any test file:
+After that you can import `jestor` in your tests and use it in any test file:
 
 ```javascript
-import { jester } from 'jester'
+import { jestor } from 'jestor'
 
 it('should return 4 whan called with 44', function() {
   const mock = jest.fn()
 
-  // define mock implementation using jester api
-  jester(mock)
+  // define mock implementation using jestor api
+  jestor(mock)
     .whenCalledWith(44)
     .return(4)
 
@@ -35,24 +35,24 @@ it('should return 4 whan called with 44', function() {
 })
 ```
 
-Proceed to [API](#api) section to see what else `jester` can do for you.
+Proceed to [API](#api) section to see what else `jestor` can do for you.
 
 ### API
 
-`jester` function accepts Jest mock as a single argument and returns an object with the following methods: `whenCalledWith` and `followRules`, for defining single and multiple rules correspondingly.
+`jestor` function accepts Jest mock as a single argument and returns an object with the following methods: `whenCalledWith` and `followRules`, for defining single and multiple rules correspondingly.
 
 #### Describing single rule
 
 The best case for `whenCalledWith` is when you want to define only one rule:
 
 ```javascript
-import { jester } from 'jester'
+import { jestor } from 'jestor'
 
 it('should return 4 whan called with 44', function() {
   const mock = jest.fn()
 
   // whenCalledWith allows to define only a single rule
-  jester(mock)
+  jestor(mock)
     .whenCalledWith(44)
     .return(4)
 
@@ -68,7 +68,7 @@ It accepts a function, which should return array of rules, which define what sho
 ```javascript
 it('should allow to define multiple rules', function() {
   const spy = jest.fn()
-  jester(spy).followRules(rules => [
+  jestor(spy).followRules(rules => [
     rules.whenCalledWith(1).return(false),
     rules.whenCalledWith(2).return(true),
     rules.whenCalledWith('foo').resolveWith('foo'),
@@ -95,13 +95,13 @@ In both cases `whenCalledWith` is used for defining conditions for the arguments
 You can pass multiple arguments to `whenCalledWith`:
 
 ```javascript
-import { jester } from 'jester'
+import { jestor } from 'jestor'
 
 it('should return 6 whan called with 2 and 3', function() {
   const mock = jest.fn()
 
   // whenCalledWith accepts multiple arguments
-  jester(mock)
+  jestor(mock)
     .whenCalledWith(2, 3)
     .return(6)
 
@@ -115,13 +115,13 @@ That includes matchers like [`anything`](https://jestjs.io/docs/en/expect#expect
 For example:
 
 ```javascript
-import { jester } from 'jester'
+import { jestor } from 'jestor'
 
 it('should return 6 whan called with string and 3', function() {
   const mock = jest.fn()
 
   // whenCalledWith also accepts expect matchers
-  jester(mock)
+  jestor(mock)
     .whenCalledWith(expect.any(String), 3)
     .return(6)
 
@@ -133,7 +133,7 @@ it('should return 6 whan called with string and 3', function() {
 #### Describing mock behavior
 
 The `whenCalledWith` function returns an object which can be used to specify mock behavior - i.e. what should happen when mock is called with the given arguments.  
-For example, in `jester(mock).whenCalledWith(2, 3).return(6)` sentence the part `.return(6)` describes mock behavior when it is called with `2` and `3`.
+For example, in `jestor(mock).whenCalledWith(2, 3).return(6)` sentence the part `.return(6)` describes mock behavior when it is called with `2` and `3`.
 
 You can use the following behaviors:
 
@@ -142,13 +142,13 @@ You can use the following behaviors:
 Describes that the value `val` should be returned when mock is called:
 
 ```javascript
-import { jester } from 'jester'
+import { jestor } from 'jestor'
 
 it('should return 6 whan called with string and 3', function() {
   const mock = jest.fn()
 
-  // tell jester to return 6 when mock is called with 3
-  jester(mock)
+  // tell jestor to return 6 when mock is called with 3
+  jestor(mock)
     .whenCalledWith(3)
     .return(6)
 
@@ -162,13 +162,13 @@ it('should return 6 whan called with string and 3', function() {
 Describes that the the promise resolved with `val` should be returned when mock is called:
 
 ```javascript
-import { jester } from 'jester'
+import { jestor } from 'jestor'
 
 it('should return resolved promise when resolveWith is used', function() {
   const mock = jest.fn()
 
-  // tell jester to return promise resolved with 6 when mock is called with 3
-  jester(mock).whenCalledWith(3).resolveWith(6)
+  // tell jestor to return promise resolved with 6 when mock is called with 3
+  jestor(mock).whenCalledWith(3).resolveWith(6)
 
   const promise = mock(3)
 
@@ -176,7 +176,7 @@ it('should return resolved promise when resolveWith is used', function() {
   expect(promise.then).toBeDefined()
 
   // when called with value other than 3, we'll not get a promise,
-  // as there is no jester rule defined
+  // as there is no jestor rule defined
   expect(mock(2)).toBe(undefined)
 
   // assert if we really got a promise resolved with 6
@@ -190,13 +190,13 @@ it('should return resolved promise when resolveWith is used', function() {
 Describes that the the promise rejected with `val` should be returned when mock is called:
 
 ```javascript
-import { jester } from 'jester'
+import { jestor } from 'jestor'
 
 it('should return rejected promise when rejectWith is used', function() {
   const mock = jest.fn()
 
-  // tell jester to return rejected promise
-  jester(mock).whenCalledWith(2).rejectWith('failure');
+  // tell jestor to return rejected promise
+  jestor(mock).whenCalledWith(2).rejectWith('failure');
 
   // assert if we really got a promise rejected with 'failure'
   const err = await mock(2).catch(e => e);
@@ -209,18 +209,18 @@ it('should return rejected promise when rejectWith is used', function() {
 Describes that value `val` should be thrown when mock is called:
 
 ```javascript
-import { jester } from 'jester'
+import { jestor } from 'jestor'
 
 it('should throw an exception when throw is used', function() {
   const mock = jest.fn()
 
-  // tell jester to throw
-  jester(mock)
+  // tell jestor to throw
+  jestor(mock)
     .whenCalledWith(2)
     .throw('exception')
 
   // assert if we really got an exception
-  jester(mock)
+  jestor(mock)
     .whenCalledWith(2)
     .throw('exception')
   expect(() => {
@@ -254,15 +254,15 @@ describe('my function', function() {
 
 Writing such mock implementation is unpleasant experience, you end up writing a bunch of `if` statements and code quickly become messy.
 
-Here is when `jester` comes to rescue. With `jester` test written above can be written as:
+Here is when `jestor` comes to rescue. With `jestor` test written above can be written as:
 
 ```javascript
-import { jester } from 'jester'
+import { jestor } from 'jestor'
 
 describe('my function', function() {
   it('should return a value', function() {
     const mock = jest.fn()
-    jester(mock).followRules(rules => [
+    jestor(mock).followRules(rules => [
       rules.whenCalledWith('Alice').return('human'),
       rules.whenCalledWith(expect.any(Number), expect.any(Number)).return('numbers'),
       rules.whenCalledWith(expect.any(Function)).return('function')
@@ -271,20 +271,25 @@ describe('my function', function() {
 })
 ```
 
+## Why `jestor`
+
+It should have been named `jester`, as jester is a person who jests.  
+However the names `jester`, `jestr` and even `jster` have been taken. As well as `mocker` and `jocker`.
+
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
 
-[deps-image]: https://img.shields.io/david/bhovhannes/jester.svg
-[deps-url]: https://david-dm.org/bhovhannes/jester
-[dev-deps-image]: https://img.shields.io/david/dev/bhovhannes/jester.svg
-[dev-deps-url]: https://david-dm.org/bhovhannes/jester#info=devDependencies
+[deps-image]: https://img.shields.io/david/bhovhannes/jestor.svg
+[deps-url]: https://david-dm.org/bhovhannes/jestor
+[dev-deps-image]: https://img.shields.io/david/dev/bhovhannes/jestor.svg
+[dev-deps-url]: https://david-dm.org/bhovhannes/jestor#info=devDependencies
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: LICENSE
-[npm-url]: https://www.npmjs.org/package/jester
-[npm-version-image]: https://img.shields.io/npm/v/jester.svg?style=flat
-[npm-downloads-image]: https://img.shields.io/npm/dm/jester.svg?style=flat
-[travis-url]: https://travis-ci.com/bhovhannes/jester
-[travis-image]: https://img.shields.io/travis/bhovhannes/jester.svg?style=flat
-[codecov-url]: https://codecov.io/gh/bhovhannes/jester
-[codecov-image]: https://img.shields.io/codecov/c/github/bhovhannes/jester.svg
+[npm-url]: https://www.npmjs.org/package/jestor
+[npm-version-image]: https://img.shields.io/npm/v/jestor.svg?style=flat
+[npm-downloads-image]: https://img.shields.io/npm/dm/jestor.svg?style=flat
+[travis-url]: https://travis-ci.com/bhovhannes/jestor
+[travis-image]: https://img.shields.io/travis/bhovhannes/jestor.svg?style=flat
+[codecov-url]: https://codecov.io/gh/bhovhannes/jestor
+[codecov-image]: https://img.shields.io/codecov/c/github/bhovhannes/jestor.svg

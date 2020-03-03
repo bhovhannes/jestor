@@ -1,9 +1,9 @@
-import { jester } from './index'
+import { jestor } from './index'
 
-describe('jester', function() {
+describe('jestor', function() {
   it(`should allow to specify multiple rules using followRules`, async function() {
     const spy = jest.fn()
-    jester(spy).followRules(rules => [
+    jestor(spy).followRules(rules => [
       rules.whenCalledWith(1).return(false),
       rules.whenCalledWith(2).return(true),
       rules.whenCalledWith('foo').resolveWith('foo'),
@@ -23,7 +23,7 @@ describe('jester', function() {
 
   it(`should support asymmetric expect matchers inside rules`, function() {
     const spy = jest.fn()
-    jester(spy)
+    jestor(spy)
       .whenCalledWith(expect.any(Object), 7, expect.anything())
       .return(true)
     expect(spy({}, 7, 'foo')).toBe(true)
@@ -32,7 +32,7 @@ describe('jester', function() {
 
   it(`should use jest equals for comparing rule arguments`, function() {
     const spy = jest.fn()
-    jester(spy)
+    jestor(spy)
       .whenCalledWith({ foo: [1] })
       .return(4)
     expect(spy({ foo: [1] })).toBe(4)
@@ -40,7 +40,7 @@ describe('jester', function() {
 
   it(`should allow to specify a rule returning a value`, function() {
     const spy = jest.fn()
-    jester(spy)
+    jestor(spy)
       .whenCalledWith(44)
       .return(4)
     expect(spy(44)).toBe(4)
@@ -48,7 +48,7 @@ describe('jester', function() {
 
   it(`should allow to specify a rule returning a promise resolved with the given value`, async function() {
     const spy = jest.fn()
-    jester(spy)
+    jestor(spy)
       .whenCalledWith(44)
       .resolveWith('success')
     const foo = await spy(44)
@@ -57,7 +57,7 @@ describe('jester', function() {
 
   it(`should allow to specify a rule returning a promise rejected with the given value`, async function() {
     const spy = jest.fn()
-    jester(spy)
+    jestor(spy)
       .whenCalledWith(44)
       .rejectWith('failure')
     const err = await spy(44).catch(e => e)
@@ -66,7 +66,7 @@ describe('jester', function() {
 
   it(`should allow to specify a rule throwing an exception`, function() {
     const spy = jest.fn()
-    jester(spy)
+    jestor(spy)
       .whenCalledWith(44)
       .throw('exception')
     expect(() => {
