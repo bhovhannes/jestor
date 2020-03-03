@@ -39,7 +39,7 @@ Proceed to [API](#api) section to see what else `jestor` can do for you.
 
 ### API
 
-`jestor` function accepts Jest mock as a single argument and returns an object with the following methods: `whenCalledWith` and `followRules`, for defining single and multiple rules correspondingly.
+`jestor` function accepts Jest mock as a single argument and returns an object with the following methods: `whenCalledWith` and `followRules` for defining single and multiple rules correspondingly.
 
 #### Describing single rule
 
@@ -63,7 +63,7 @@ it('should return 4 whan called with 44', function() {
 #### Describing multiple rules
 
 If you want to define multiple rules, `followRules` should be used.  
-It accepts a function, which should return array of rules, which define what should mock should do when the given condition is met:
+It accepts a function, which should return array of rules, which define what mock should do when the given condition is met:
 
 ```javascript
 it('should allow to define multiple rules', function() {
@@ -109,7 +109,7 @@ it('should return 6 whan called with 2 and 3', function() {
 })
 ```
 
-You can pass any assymetrical [Expect](https://jestjs.io/docs/en/expect) matcher to `whenCalledWith`.  
+You can pass any asymmetrical [Expect](https://jestjs.io/docs/en/expect) matcher to `whenCalledWith`.  
 That includes matchers like [`anything`](https://jestjs.io/docs/en/expect#expectanything), [`any`](https://jestjs.io/docs/en/expect#expectanyconstructor), [`arrayContaining`](https://jestjs.io/docs/en/expect#expectarraycontainingarray), etc.
 
 For example:
@@ -133,7 +133,7 @@ it('should return 6 whan called with string and 3', function() {
 #### Describing mock behavior
 
 The `whenCalledWith` function returns an object which can be used to specify mock behavior - i.e. what should happen when mock is called with the given arguments.  
-For example, in `jestor(mock).whenCalledWith(2, 3).return(6)` sentence the part `.return(6)` describes mock behavior when it is called with `2` and `3`.
+For example, in `jestor(mock).whenCalledWith(2, 3).return(6)` sentence the part `.return(6)` describes mock behavior when it is called with arguments `2` and `3`.
 
 You can use the following behaviors:
 
