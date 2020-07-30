@@ -18,6 +18,7 @@
     "test:typecheck": "tsc --noEmit",
     "test:sources": "jest --coverage",
     "test:sources:watch": "jest --watch",
+    "prepublishOnly": "yarn build",
     "coverage": "cat coverage/*/lcov.info | codecov"
   },
   "repository": {
