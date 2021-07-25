@@ -40,7 +40,7 @@
   "devDependencies": {
     "@arkweid/lefthook": "0.7.6",
     "@bhovhannes/shared-config": "0.0.1",
-    "@commitlint/cli": "12.1.4",
+    "@commitlint/cli": "13.1.0",
     "@rollup/plugin-typescript": "8.2.3",
     "@types/jest": "26.0.24",
     "jest": "27.0.6",
