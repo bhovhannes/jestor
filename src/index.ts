@@ -5,7 +5,9 @@ interface IJestorBehavior {
   throw(value: any): void
 }
 
-type JestorRuleGetter = (ruleBuilder: { whenCalledWith(...args: any[]): IJestorBehavior }) => any[]
+type JestorRuleGetter = (ruleBuilder: {
+  whenCalledWith(...args: any[]): IJestorBehavior
+}) => unknown
 
 interface IJestor {
   whenCalledWith(...args: any[]): IJestorBehavior
@@ -17,7 +19,7 @@ export function jestor(jestMock: jest.Mock): IJestor {
   return {
     followRules: (ruleGetter) => {
       ruleGetter({
-        whenCalledWith: getRuleBuilder((rule) => rules.push(rule)),
+        whenCalledWith: getRuleBuilder((rule) => rules.push(rule))
       })
       return jestMock.mockImplementation((...actualArgs) => {
         for (let i = rules.length - 1; i >= 0; --i) {
@@ -37,7 +39,7 @@ export function jestor(jestMock: jest.Mock): IJestor {
           return rule.valueWrapper(rule.returnValue)
         }
       })
-    }),
+    })
   }
 }
 
@@ -50,9 +52,9 @@ const equals = (function () {
         jestEqual = this.equals
         return {
           pass: true,
-          message: () => '',
+          message: () => ''
         }
-      },
+      }
     })
     expect(1)[MATCHER_NAME]()
     delete expect[MATCHER_NAME]
@@ -80,7 +82,7 @@ function getRuleBuilder(collectRule) {
     const rule = {
       matcher: getRuleMatcher(expectedArgs),
       valueWrapper: undefined,
-      returnValue: undefined,
+      returnValue: undefined
     }
     return {
       return: (returnValue) => {
@@ -107,7 +109,7 @@ function getRuleBuilder(collectRule) {
         }
         rule.returnValue = value
         collectRule(rule)
-      },
+      }
     }
   }
 }

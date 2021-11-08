@@ -59,17 +59,17 @@ it('should return 4 whan called with 44', function () {
 #### Describing multiple rules
 
 If you want to define multiple rules, `followRules` should be used.  
-It accepts a function, which should return array of rules, which define what mock should do when the given condition is met:
+It accepts a function, which define what mock should do when the given condition is met:
 
 ```javascript
-it('should allow to define multiple rules', function() {
+it('should allow to define multiple rules', function () {
   const spy = jest.fn()
-  jestor(spy).followRules(rules => [
-    rules.whenCalledWith(1).return(false),
-    rules.whenCalledWith(2).return(true),
-    rules.whenCalledWith('foo').resolveWith('foo'),
+  jestor(spy).followRules((rules) => {
+    rules.whenCalledWith(1).return(false)
+    rules.whenCalledWith(2).return(true)
+    rules.whenCalledWith('foo').resolveWith('foo')
     rules.whenCalledWith('bar').rejectWith('bar')
-  ])
+  })
 
   expect(spy(1)).toBe(false)
   expect(spy(2)).toBe(true)
@@ -77,7 +77,7 @@ it('should allow to define multiple rules', function() {
   const foo = await spy('foo')
   expect(foo).toBe('foo')
 
-  await spy('bar').catch(e => {
+  await spy('bar').catch((e) => {
     expect(e).toBe('bar')
   })
 })
@@ -154,7 +154,7 @@ Describes that the the promise resolved with `val` should be returned when mock 
 ```javascript
 import { jestor } from 'jestor'
 
-it('should return resolved promise when resolveWith is used', function() {
+it('should return resolved promise when resolveWith is used', function () {
   const mock = jest.fn()
 
   // tell jestor to return promise resolved with 6 when mock is called with 3
@@ -182,15 +182,15 @@ Describes that the the promise rejected with `val` should be returned when mock 
 ```javascript
 import { jestor } from 'jestor'
 
-it('should return rejected promise when rejectWith is used', function() {
+it('should return rejected promise when rejectWith is used', function () {
   const mock = jest.fn()
 
   // tell jestor to return rejected promise
-  jestor(mock).whenCalledWith(2).rejectWith('failure');
+  jestor(mock).whenCalledWith(2).rejectWith('failure')
 
   // assert if we really got a promise rejected with 'failure'
-  const err = await mock(2).catch(e => e);
-  expect(err).toBe('failure');
+  const err = await mock(2).catch((e) => e)
+  expect(err).toBe('failure')
 })
 ```
 
@@ -248,11 +248,11 @@ import { jestor } from 'jestor'
 describe('my function', function () {
   it('should return a value', function () {
     const mock = jest.fn()
-    jestor(mock).followRules((rules) => [
-      rules.whenCalledWith('Alice').return('human'),
-      rules.whenCalledWith(expect.any(Number), expect.any(Number)).return('numbers'),
-      rules.whenCalledWith(expect.any(Function)).return('function'),
-    ])
+    jestor(mock).followRules((rules) => {
+      rules.whenCalledWith('Alice').return('human')
+      rules.whenCalledWith(expect.any(Number), expect.any(Number)).return('numbers')
+      rules.whenCalledWith(expect.any(Function)).return('function')
+    })
   })
 })
 ```

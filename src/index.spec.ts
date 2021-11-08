@@ -3,12 +3,12 @@ import { jestor } from './index'
 describe('jestor', function () {
   it(`should allow to specify multiple rules using followRules`, async function () {
     const spy = jest.fn()
-    jestor(spy).followRules((rules) => [
-      rules.whenCalledWith(1).return(false),
-      rules.whenCalledWith(2).return(true),
-      rules.whenCalledWith('foo').resolveWith('foo'),
-      rules.whenCalledWith('bar').rejectWith('bar'),
-    ])
+    jestor(spy).followRules((rules) => {
+      rules.whenCalledWith(1).return(false)
+      rules.whenCalledWith(2).return(true)
+      rules.whenCalledWith('foo').resolveWith('foo')
+      rules.whenCalledWith('bar').rejectWith('bar')
+    })
 
     expect(spy(1)).toBe(false)
     expect(spy(2)).toBe(true)
