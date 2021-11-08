@@ -1,6 +1,6 @@
 {
   "name": "jestor",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Utility for creating mock implementation, defining how Jest mocks should behave",
   "type": "commonjs",
   "main": "dist/jestor.js",
