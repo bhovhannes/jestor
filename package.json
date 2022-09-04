@@ -40,7 +40,7 @@
   "devDependencies": {
     "@evilmartians/lefthook": "1.1.1",
     "@bhovhannes/shared-config": "0.0.1",
-    "@commitlint/cli": "17.1.1",
+    "@commitlint/cli": "17.1.2",
     "@rollup/plugin-typescript": "8.4.0",
     "@types/jest": "28.1.8",
     "jest": "28.1.3",
