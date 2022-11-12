@@ -1,7 +1,7 @@
-import rollupTypescript from '@rollup/plugin-typescript'
-import pkg from './package.json'
+const rollupTypescript = require('@rollup/plugin-typescript')
+const pkg = require('./package.json')
 
-export default {
+module.exports = {
   input: `src/index.ts`,
   output: {
     file: pkg.main,
