@@ -38,7 +38,7 @@
   },
   "homepage": "https://github.com/bhovhannes/jestor#readme",
   "devDependencies": {
-    "@evilmartians/lefthook": "1.2.6",
+    "@evilmartians/lefthook": "1.2.7",
     "@bhovhannes/shared-config": "0.0.1",
     "@commitlint/cli": "17.4.2",
     "@rollup/plugin-typescript": "11.0.0",
