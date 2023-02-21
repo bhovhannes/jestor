@@ -71,7 +71,7 @@ function getRuleMatcher(args) {
     actualArgs.length === args.length &&
     actualArgs.every((actualArg, i) => {
       const arg = args[i]
-      return arg !== null && typeof arg.asymmetricMatch === 'function'
+      return arg != null && typeof arg.asymmetricMatch === 'function'
         ? arg.asymmetricMatch(actualArg)
         : equals(arg, actualArg)
     })
