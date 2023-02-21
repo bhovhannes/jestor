@@ -63,4 +63,10 @@ describe('jestor', function () {
       spy(44)
     }).toThrow('exception')
   })
+
+  it(`should allow to specify a rule with an undefined argument`, function () {
+    const spy = jest.fn()
+    jestor(spy).whenCalledWith(null, undefined, true).return(4)
+    expect(spy(null, undefined, true)).toBe(4)
+  })
 })
